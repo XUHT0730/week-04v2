@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>00004-v2</title>
+    <!-- 引入 BS CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- 引入 Axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<style>
+    img {
+    object-fit: contain;
+    max-width: 100%;
+    }
+
+    .primary-image {
+    height: 300px;
+    }
+
+    .images {
+    height: 150px;
+    }
+    
+    [v-cloak] + #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 9999;
+    }
+
+    [v-cloak] + #loader:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 3px solid #ccc;
+      border-top-color: #333;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+</style>
+<body>
+    <div id="app" v-cloak>
+        <div id="loader"></div>
+        <div class="container">
+            <div class="text-end mt-4">
+              <button type="button" class="btn btn-primary" @click="openModal('new')">
+                建立新的產品
+              </button>
+            </div>
+            <table class="table mt-4">
+              <thead>
+                <tr>
+                  <th width="120">
+                    分類
+                  </th>
+                  <th>產品名稱</th>
+                  <th width="120">
+                    原價
+                  </th>
+                  <th width="120">
+                    售價
+                  </th>
+                  <th width="100">
+                    是否啟用
+                  </th>
+                  <th width="120">
+                    編輯
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item) in products" :key="item.id">
+                  <td width="150">{{ item.category }}</td>
+                  <td width="120">{{ item.title }}</td>
+                  <td class="text-end">{{ item.origin_price }}</td>
+                  <td class="text-end">{{item.price}}</td>
+                  <td>
+                    <span v-if="item.is_enabled" class="text-success">啟用</span>
+                    <span v-else>未啟用</span>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal('edit', item)">
+                        編輯
+                      </button>
+                      <button type="button" class="btn btn-outline-danger btn-sm"  @click="openModal('delete', item)">
+                        刪除
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <!-- 分頁元件 ( Pagination ) -->
+          <!--  props => 使用 v-bind 動態綁定 pagination 變數及 getProducts 方法-->
+          <pagination
+           :pagination="pagination"
+           :get-Products="getProducts"
+          ></pagination>
+          <!-- 分頁元件(Pagination) -->
+          </div>
+        <!-- Modal -->
+        <my-modal
+        :temp-Product="tempProduct" 
+        :update-Product="updateProduct"
+        :is-new="isNew"
+        ref="pModal"
+        ></my-modal>
+        <!-- Modal -->
+
+        <!-- 刪除 Modal -->
+        <delete-modal
+        :temp-Product="tempProduct"
+        :del-Product="delProduct"
+        ref="dModal">
+      </delete-modal>
+        <!-- 刪除 Modal -->
+    </div>
+
+<!-- 引入 BS JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!--  引入 Vue 3-->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!-- 引入本地端 JS -->
+<script type="module" src="index.js"></script>
+</body>
+</html>
