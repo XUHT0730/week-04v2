@@ -1,8 +1,8 @@
 const { createApp } = Vue;
 
-import pagination from './pagination.js';
-import myModal from './myModal.js';
-import deleteModal from './deleteModal.js';
+import pagination from './components/pagination.js';
+import myModal from './components/myModal.js';
+import deleteModal from './components/deleteModal.js';
 
 const app = createApp({
     data() {
