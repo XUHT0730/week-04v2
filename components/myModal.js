@@ -1,11 +1,11 @@
 export default {
-    data() {
-        return {
-            myModal : null,
-        }
-    },
-    props : ['tempProduct','updateProduct','isNew'],
-    template : `<div id="myModal" ref="myModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  data() {
+    return {
+      myModal: null,
+    };
+  },
+  props: ["tempProduct", "updateProduct", "isNew"],
+  template: `<div id="myModal" ref="myModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
     <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
@@ -113,30 +113,30 @@ export default {
     </div>
     </div>
 </div>`,
-    methods : {
-        // 關閉 modal
-        closeModal(){
-            // 套用 modal.hide() 方法關閉 model
-            this.myModal.hide();
-        },
-        // 顯示 modal
-        showModal(){
-            this.myModal.show();
-        },
-        /*createImages() 的 imagesUrl = [] 
+  methods: {
+    // 關閉 modal
+    closeModal() {
+      // 套用 modal.hide() 方法關閉 model
+      this.myModal.hide();
+    },
+    // 顯示 modal
+    showModal() {
+      this.myModal.show();
+    },
+    /*createImages() 的 imagesUrl = [] 
         是避免在編輯產品時如果沒有 imagesUrl 屬性去執行接下來的 push 而出錯
         push('') 是用來新增一個空的 input 讓使用者可以填寫要新增的圖片網址 */
-        createImages(){
-          this.tempProduct.imagesUrl = [];
-          this.tempProduct.imagesUrl.push('');
-      },
+    createImages() {
+      this.tempProduct.imagesUrl = [];
+      this.tempProduct.imagesUrl.push("");
     },
-    mounted() {
-        this.myModal = new bootstrap.Modal(this.$refs.myModal,{
-            // 禁止使用者使用 ESC 鍵關閉互動視窗
-            keyboard: false,
-            // 禁止使用者點擊 modal 以外的地方來關閉視窗，避免資料輸入到一半遺失
-            backdrop: 'static'
-        });
-    },
-}
+  },
+  mounted() {
+    this.myModal = new bootstrap.Modal(this.$refs.myModal, {
+      // 禁止使用者使用 ESC 鍵關閉互動視窗
+      keyboard: false,
+      // 禁止使用者點擊 modal 以外的地方來關閉視窗，避免資料輸入到一半遺失
+      backdrop: "static",
+    });
+  },
+};

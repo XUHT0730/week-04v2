@@ -24,7 +24,6 @@ const app = createApp({
                  window.location = 'index.html';
               })
               .catch((err) =>{
-                console.log(err);
                 alert(err.data.message);
               })
         }

@@ -79,7 +79,7 @@ const app = createApp({
                 用意是後續串接刪除 API 時，需要取得該產品的 id，
                 最後開啟 deleteModel*/
             else if (status === 'delete'){
-                this.tempProduct = {...item};
+                this.tempProduct = item;
                 //this.deleteModal.show();
                 this.$refs.dModal.showModal();
             }
